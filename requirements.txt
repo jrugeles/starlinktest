@@ -1,0 +1,8 @@
+# Dependencias para ambos programas. No es un lockfile.
+grpcio>=1.76.0,<2
+grpcio-reflection>=1.76.0,<2
+protobuf>=6.33.4,<7
+yagrc==1.1.2
+typing-extensions>=4.3.0,<5
+matplotlib>=3.7,<4
+numpy>=1.24,<3
