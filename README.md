@@ -31,8 +31,6 @@ La comunicación gRPC usa **[sparky8512/starlink-grpc-tools](https://github.com/
 
 Referencia de implementación: [`starlink_grpc.py` en el repositorio original](https://github.com/sparky8512/starlink-grpc-tools/blob/main/starlink_grpc.py).
 
-El percentil 95, la integración de tráfico/energía, la detección de rachas, las gráficas y la exportación son cálculos de **nuestro monitor**; no se llama a `history_stats()`. Los programas no envían órdenes de reinicio, plegado ni borrado del mapa.
-
 ## Requisitos
 
 - Un computador conectado a la red de la antena por Wi-Fi o Ethernet.
@@ -180,16 +178,22 @@ Se integra el tráfico suponiendo muestras de 1 s: **MB = Σ(bit/s) / 8 000 000*
 ## Alcance de las mediciones
 
 - El tráfico observado no es una prueba de capacidad máxima. Las descargas/subidas de prueba se generan por separado.
-- La latencia es al PoP reportado por Starlink, no necesariamente a un servidor de Internet elegido por el estudiante.
+- La latencia es al PoP reportado por Starlink. 
 - No se obtiene RSSI en dBm, I/Q ni identificación confirmada del satélite conectado.
 - El SNR numérico está obsoleto en el módulo fuente. El mapa normalizado no tiene una conversión documentada a dB; sus ejes son índices de matriz, no azimut/elevación.
 - Los cambios de latencia no prueban por sí solos un cambio de satélite.
 - Los campos disponibles dependen del hardware y firmware; un valor no disponible no significa cero.
 - Los retrocesos del contador permiten detectar posibles reinicios; no se garantiza detectar un reinicio si el nuevo contador ya superó el anterior durante una desconexión larga.
 
-## Práctica sugerida
+## Pruebas sugeridas
 
-Registrar tres fases de cinco minutos: poco tráfico, descarga y subida. Mantener ubicación, orientación y conexión local; anotar hora de cada fase, aplicación usada, firmware y presencia de otros usuarios. No activar historial previo para comparar únicamente las fases de la práctica.
+Realizar el proceso de configuración de la antena con la aplicación de Starlink.
+
+Ejecutar el programa probar_starlink.py - analizar resultados
+
+Ejecutar el programa starlink_monitor_v2.py 
+
+Registrar tres fases de cinco minutos: poco tráfico, descarga y subida. Mantener ubicación, orientación y conexión local; anotar hora de cada fase. No activar historial previo para comparar únicamente las fases de la práctica.
 
 Comparar media, mediana y P95 de latencia, pérdida reportada, tráfico y potencia. Usar Ethernet cuando se busque reducir la variabilidad de la conexión local. El monitor no genera el tráfico de carga ni registra automáticamente las etiquetas de las fases.
 
